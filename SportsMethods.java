@@ -8,20 +8,21 @@ public class SportsMethods {
 	private int attempts;
 	private String nameInput, name;
 	
+	
+	
 	public void addEvent() {
 		
+		System.out.print("Event name: ");
+		nameInput = scan.nextLine();
+		name = nameInput.substring(0,1).toUpperCase() + nameInput.substring(1).toLowerCase();
+		name = name.trim();
+			
 		while (name == null || name.isEmpty()) {
-			System.out.print("Event name: ");
+			System.out.println("Error: name can't be empty." );
+			System.out.print("Event name: ");				
 			nameInput = scan.nextLine();
 			name = nameInput.substring(0,1).toUpperCase() + nameInput.substring(1).toLowerCase();
 			name = name.trim();
-				
-			if (name == null || name.isEmpty()) {
-				System.out.println("Error: name can't be empty." );
-			}
-			else {
-				continue;
-			}
 		}
 		
 		while (attempts <= 0) {
