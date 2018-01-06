@@ -3,9 +3,11 @@ public class Sports {
 	
 	public static void main(String[] args) {
 		
-		SportsMethods test = new SportsMethods();
+		StartMethods test = new StartMethods();
 		
-		test.addEvent();
+		while (true) {
+		test.runProgram();
+		}
 	}
 
 }
