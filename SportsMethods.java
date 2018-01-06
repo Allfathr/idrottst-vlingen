@@ -42,4 +42,16 @@ public class SportsMethods {
 		allEvents.add(event);
 		System.out.println(eventName + " added.");
 	}
+	
+	public void addParticipant() {
+		System.out.print("First name: ");
+		String firstName = scan.nextLine();
+		
+		System.out.print("Last name: ");
+		String lastName = scan.nextLine();
+		
+		System.out.print("Team: ");
+		String teamName = scan.nextLine();
+	}
+
 }
