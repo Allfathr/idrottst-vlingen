@@ -23,6 +23,7 @@ public class SportsMethods {
 		
 		allEvents.add(event);
 		System.out.println(name + " added.");
+		hej
 	}
 	
 
