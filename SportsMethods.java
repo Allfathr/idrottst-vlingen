@@ -8,15 +8,21 @@ public class SportsMethods {
 	
 	public void addEvent() {
 		System.out.print("Event name: ");
-		String name = scan.nextLine();
+		String nameInput = scan.nextLine();
+		String name = nameInput.substring(0,1).toUpperCase() + nameInput.substring(1).toLowerCase();
+		name = name.trim();
+		
+		if (allEvents.contains(name)) {
+			System.out.println("Error " + name + " already added.");
+		}
+
 		System.out.print("Attempts allowed: ");
 		int attempts = scan.nextInt();
 		scan.nextLine();
-		System.out.println(name + " added.");
-		
 		Event event = new Event(name, attempts);
 		
 		allEvents.add(event);
+		System.out.println(name + " added.");
 	}
 	
 
