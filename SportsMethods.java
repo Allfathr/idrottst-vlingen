@@ -6,7 +6,7 @@ public class SportsMethods {
 	private Scanner scan = new Scanner(System.in);
 	private ArrayList<Event> allEvents = new ArrayList<>();
 	private int attempts;
-	private String nameInput, name;
+	private String nameInput, eventName;
 	
 	
 	
@@ -14,15 +14,15 @@ public class SportsMethods {
 		
 		System.out.print("Event name: ");
 		nameInput = scan.nextLine();
-		name = nameInput.substring(0,1).toUpperCase() + nameInput.substring(1).toLowerCase();
-		name = name.trim();
+		eventName = nameInput.substring(0,1).toUpperCase() + nameInput.substring(1).toLowerCase();
+		eventName = eventName.trim();
 			
-		while (name == null || name.isEmpty()) {
+		while (eventName == null || eventName.isEmpty()) {
 			System.out.println("Error: name can't be empty." );
 			System.out.print("Event name: ");				
 			nameInput = scan.nextLine();
-			name = nameInput.substring(0,1).toUpperCase() + nameInput.substring(1).toLowerCase();
-			name = name.trim();
+			eventName = nameInput.substring(0,1).toUpperCase() + nameInput.substring(1).toLowerCase();
+			eventName = eventName.trim();
 		}
 		
 		while (attempts <= 0) {
@@ -37,9 +37,9 @@ public class SportsMethods {
 				continue;
 			}
 		}
-		
-		Event event = new Event(name, attempts);
+	
+		Event event = new Event(eventName, attempts);
 		allEvents.add(event);
-		System.out.println(name + " added.");
+		System.out.println(eventName + " added.");
 	}
 }
