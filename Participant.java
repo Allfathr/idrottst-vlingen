@@ -4,7 +4,7 @@ public class Participant {
 	private String firstName, lastName, teamName;
 	private int participantNumber;
 	
-	public Participant(String firstName, String lastName, String teamName) {
+	public Participant(String firstName, String lastName, String teamName, int participantNumber) {
 	
 	this.firstName = firstName; 
 	this.lastName = lastName;
