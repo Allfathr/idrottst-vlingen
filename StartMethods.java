@@ -3,16 +3,16 @@ import java.util.Scanner;
 public class StartMethods {
 	
 	private Scanner scan = new Scanner(System.in);
-	SportsMethods test = new SportsMethods();
+	private SportsMethods test = new SportsMethods();
 	
 	private void sysExit() {
 		System.out.println("Programmet avslutas");
 		System.exit(0);
 		}
 	
-	public void startOptions() {
+	private void startOptions() {
 		
-		System.out.println("command: ");
+		System.out.print("Command: ");
 		String choice = scan.nextLine();
 
 		switch (choice.toLowerCase()) {
@@ -21,7 +21,7 @@ public class StartMethods {
 			test.addEvent();
 			break;
 		case "add participant":
-			
+			test.addParticipant();
 			break;
 		case "remove participant":
 
@@ -41,7 +41,7 @@ public class StartMethods {
 			sysExit();
 			break;
 		default:
-			System.out.println("error - Fel indata.");
+			System.out.println("Error - fel indata.");
 			break;
 		}
 	}
