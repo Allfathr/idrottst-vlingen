@@ -4,25 +4,28 @@ import java.util.ArrayList;
 public class SportsMethods {
 	
 	private Scanner scan = new Scanner(System.in);
-	private ArrayList<Event> allEvents = new ArrayList<>();
+	public ArrayList<Event> allEvents = new ArrayList<>();
+	public ArrayList<Participant> allParticipants = new ArrayList<>();
 	private int attempts;
-	private String nameInput, eventName;
+	private String eventName, firstName, lastName, teamName;
 	
-	
+	private String capitalizeTrim(String original) {
+		original = original.substring(0,1).toUpperCase() + original.substring(1).toLowerCase();
+		original = original.trim();
+		return original;
+	}
 	
 	public void addEvent() {
 		
 		System.out.print("Event name: ");
-		nameInput = scan.nextLine();
-		eventName = nameInput.substring(0,1).toUpperCase() + nameInput.substring(1).toLowerCase();
-		eventName = eventName.trim();
+		eventName = scan.nextLine();
+		capitalizeTrim(eventName);
 			
 		while (eventName == null || eventName.isEmpty()) {
 			System.out.println("Error: name can't be empty." );
 			System.out.print("Event name: ");				
-			nameInput = scan.nextLine();
-			eventName = nameInput.substring(0,1).toUpperCase() + nameInput.substring(1).toLowerCase();
-			eventName = eventName.trim();
+			eventName = scan.nextLine();
+			capitalizeTrim(eventName);
 		}
 		
 		while (attempts <= 0) {
@@ -44,14 +47,16 @@ public class SportsMethods {
 	}
 	
 	public void addParticipant() {
-		System.out.print("First name: ");
-		String firstName = scan.nextLine();
+		
+		while (firstName == null || firstName.trim().isEmpty()) {
+			System.out.print("First name: ");
+			firstName = scan.nextLine();
+			capitalizeTrim(firstName);
+		}
 		
 		System.out.print("Last name: ");
-		String lastName = scan.nextLine();
-		
+		lastName = scan.nextLine();
 		System.out.print("Team: ");
-		String teamName = scan.nextLine();
+		teamName = scan.nextLine();
 	}
-
 }
