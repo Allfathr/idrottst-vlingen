@@ -10,24 +10,31 @@ public class SportsMethods {
 	private String eventName, firstName, lastName, teamName;
 	
 	private String capitalizeTrim(String original) {
-		original = original.substring(0,1).toUpperCase() + original.substring(1).toLowerCase();
 		original = original.trim();
+		original = original.substring(0,1).toUpperCase() + original.substring(1).toLowerCase();
 		return original;
 	}
 	
 	public void addEvent() {
 		
+		for (;;) {
 		System.out.print("Event name: ");
 		eventName = scan.nextLine();
 		capitalizeTrim(eventName);
 			
-		while (eventName == null || eventName.isEmpty()) {
+		if (eventName == null || eventName.isEmpty()) {
 			System.out.println("Error: name can't be empty." );
 			System.out.print("Event name: ");				
 			eventName = scan.nextLine();
 			capitalizeTrim(eventName);
+			continue;
 		}
 		
+		else {
+			break;
+		}
+		
+		}
 		while (attempts <= 0) {
 			System.out.print("Attempts allowed: ");
 			attempts = scan.nextInt();
