@@ -1,4 +1,3 @@
-
 public class Event {
 	
 	private String name;
@@ -9,4 +8,7 @@ public class Event {
 		this.attempts = attempts;
 	}
 
+	public String getName() {
+		return name;
+	}
 }
