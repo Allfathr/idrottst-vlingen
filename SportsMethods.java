@@ -100,7 +100,7 @@ public class SportsMethods {
 		}
 		Participant participant = new Participant(firstName, lastName, teamName, participantNumber);
 		allParticipants.add(participant);
-		System.out.print("");
+		System.out.print(firstName + " " + lastName + " from " + teamName + " with number " + participantNumber + " added");
 	}
 	
 	public void addResult() {
