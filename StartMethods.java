@@ -5,45 +5,48 @@ public class StartMethods {
 	private Scanner scan = new Scanner(System.in);
 	private SportsMethods test = new SportsMethods();
 	
-	private void sysExit() {
-		System.out.println("Programmet avslutas");
-		System.exit(0);
-		}
-	
 	private void startOptions() {
 		
 		System.out.print("Command: ");
-		String choice = scan.nextLine();
-
-		switch (choice.toLowerCase()) {
-
-		case "add event":
+		String commander = scan.nextLine();
+		
+		if (commander.toLowerCase().equals("add event")) {
 			test.addEvent();
-			break;
-		case "add participant":
-			test.addParticipant();
-			break;
-		case "remove participant":
-
-			break;
-		case "add result":
-
-			break;
-		case "participant":
-
-			break;
-		case "hi":
-			break;
-		case "message":
-			
-			break;
-		case "exit":
-			sysExit();
-			break;
-		default:
-			System.out.println("Error - fel indata.");
-			break;
 		}
+			
+		else if (commander.toLowerCase().equals("add participant")) {
+			test.addParticipant();
+		}
+		
+		else if (commander.toLowerCase().equals("remove participant")) {
+			test.removeParticipant();
+		}
+		
+		else if (commander.toLowerCase().equals("add result")) {
+			test.addResult();
+		}
+		
+		else if (commander.toLowerCase().equals("participant")) {
+			test.participant();
+		}
+		
+		else if (commander.toLowerCase().equals("grennamn")) {
+			test.eventInput();
+		}
+		
+		else if (commander.length() > 4 && commander.substring(0, 7).toLowerCase().equals("message")) {
+			String parts[] = commander.split(" ", 2);
+			String longText = parts[1];
+			test.message(longText);
+		}
+		
+		else if (commander.toLowerCase().equals("exit")) {
+			test.sysExit();
+		}
+		else {
+			System.out.println("Nu blev det fel Anton");
+		}
+		
 	}
 	
 	public void runProgram() {
