@@ -4,10 +4,6 @@ public class Sports {
 	public static void main(String[] args) {
 		
 		StartMethods test = new StartMethods();
-		
-		while (true) {
-		test.runProgram();
-		}
+		test.runProgram();	
 	}
-
 }
