@@ -30,8 +30,8 @@ public class StartMethods {
 			test.participant();
 		}
 		
-		else if (commander.toLowerCase().equals("grennamn")) {
-			test.eventInput();
+		else if (test.getList().contains(commander)) {
+			test.eventInput(commander);
 		}
 		
 		else if (commander.length() > 4 && commander.substring(0, 7).toLowerCase().equals("message")) {
@@ -44,7 +44,7 @@ public class StartMethods {
 			test.sysExit();
 		}
 		else {
-			System.out.println("Nu blev det fel Anton");
+			System.out.println("Error: unknown command " + commander);
 		}
 		
 	}
