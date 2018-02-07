@@ -4,6 +4,9 @@ public class StartMethods {
 	
 	private Scanner scan = new Scanner(System.in);
 	private SportsMethods test = new SportsMethods();
+	private Participant choicePart = new Participant();
+	private Event event = new Event();
+	private Result result = new Result();
 	
 	private void startOptions() {
 		
@@ -11,30 +14,30 @@ public class StartMethods {
 		String commander = scan.nextLine();
 		
 		if (commander.toLowerCase().equals("add event")) {
-			test.addEvent();
+			event.addEvent();
 		}
 			
 		else if (commander.toLowerCase().equals("add participant")) {
-			test.addParticipant();
+			choicePart.addParticipant();
 		}
 		
 		else if (commander.toLowerCase().equals("remove participant")) {
-			test.removeParticipant();
+			choicePart.removeParticipant();
 		}
 		
 		else if (commander.toLowerCase().equals("add result")) {
-			test.addResult();
+			result.addResult();
 		}
 		
 		else if (commander.toLowerCase().equals("participant")) {
-			test.participant();
+			result.checkParticipant();
 		}
 		
-		else if (test.getList().contains(commander)) {
+		else if (event.getNameList().contains(commander)) {
 			test.eventInput(commander);
 		}
 		
-		else if (commander.length() > 4 && commander.substring(0, 7).toLowerCase().equals("message")) {
+		else if (commander.contains("message")) {
 			String parts[] = commander.split(" ", 2);
 			String longText = parts[1];
 			test.message(longText);
