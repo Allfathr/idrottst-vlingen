@@ -1,8 +1,11 @@
+import java.util.ArrayList;
+
 public class Participant {
 	
+	private ArrayList<Result> allResults = new ArrayList<>();
 	private String firstName, lastName, teamName;
 	private int participantNumber;
-	
+		
 	public Participant(String firstName, String lastName, String teamName, int participantNumber) {
 		this.firstName = firstName; 
 		this.lastName = lastName;
@@ -10,6 +13,10 @@ public class Participant {
 		this.participantNumber = participantNumber;
 	}
 	
+	public Participant() {
+		
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -24,6 +31,14 @@ public class Participant {
 	
 	public int getParticipantNumber() {
 		return participantNumber;
+	}
+	
+	public void addResult(Result result) {
+		allResults.add(result);
+	}
+	
+	public void printResults() {
+		System.out.println("Results for " + getFullName());
 	}
 	
 	public String toString() {
