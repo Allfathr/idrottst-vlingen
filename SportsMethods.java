@@ -7,11 +7,6 @@ public class SportsMethods {
 		original = original.substring(0,1).toUpperCase() + original.substring(1).toLowerCase();
 		return original;
 	}
-	// Glöm ej skriva in [grennamn] uppgift
-	public void eventInput(String choice) {
-		System.out.println("Results for " + choice);
-		
-	}
 	
 	public void message(String longText) {
 		System.out.println("############################################################");
