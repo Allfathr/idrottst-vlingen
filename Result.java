@@ -1,23 +1,20 @@
 public class Result {
 	
-	private String eventName, participantName;
+	private Event event;
+	private Participant participant;
 	private double result;
 	
 	public Result() {
 		
 	}
 
-	public Result(String eventName, String participantName, double result) {
-		this.eventName = eventName;
-		this.participantName = participantName;
+	public Result(Event event, Participant participant, double result) {
+		this.event = event;
+		this.participant = participant;
 		this.result = result;
 	}
-	
-	public String getName() {
-		return participantName;
-	}
-	
+		
 	public String toString() {
-		return String.format("Results for %s in %s: %d", participantName, eventName, result); 
+		return String.format("Results for %s in %s: %d", participant.getFullName(), event.getName(), result); 
 	}
 }
