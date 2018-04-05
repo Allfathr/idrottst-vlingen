@@ -1,3 +1,6 @@
+// Anton Sandström ansa6928
+// Jesper Jönsson jeja6606
+
 public class SportsMethods {
 	
 	// Denna metod tar bort whitespace före och efter input-strängen och sedan kapitaliserar den första 
@@ -12,7 +15,7 @@ public class SportsMethods {
 		System.out.println("############################################################");
 		System.out.println(String.format("%-58s #", "#"));
 		// Strängen som skrivs ut kan ej vara bredare än 56 karaktärer
-		System.out.println(String.format("# %-56.56s #", longText));
+		System.out.println(String.format("# %-56.56s #", longText.toUpperCase()));
 		System.out.println(String.format("%-58s #", "#"));
 		System.out.println("############################################################");
 	}
