@@ -1,3 +1,6 @@
+// Anton Sandström ansa6928
+// Jesper Jönsson jeja6606
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,19 +37,22 @@ public class StartMethods {
 			checkParticipant();
 		}
 
-		else if (getEvent(commander) != null) {
-			getEvent(commander).printResultList();
+		else if (getEvent((commander = test.capitalizeTrim(commander))) != null) {
+			getEvent(commander).getHighScore();
 		}
 
-		else if (commander.contains("message")) {
-			String parts[] = commander.split(" ", 2);
+		else if (commander.toLowerCase().contains("message")) {
+			String[] parts = commander.split(" ", 2);
 			String longText = parts[1];
 			test.message(longText);
 		}
 
 		else if (commander.toLowerCase().equals("exit")) {
 			test.sysExit();
-		} else {
+		} 
+		
+		else {
+
 			System.out.println("Error: unknown command " + commander);
 		}
 
@@ -79,7 +85,7 @@ public class StartMethods {
 		return null;
 	}
 
-	public void addParticipant() {
+	private void addParticipant() {
 
 		String mainName;
 		String surName;
@@ -125,7 +131,7 @@ public class StartMethods {
 		} while (nameOfTeam == null || nameOfTeam.trim().isEmpty());
 	}
 
-	public void removeParticipant() {
+	private void removeParticipant() {
 
 		int removeNumber;
 
@@ -138,47 +144,72 @@ public class StartMethods {
 		if (tempParticipant != null) {
 			System.out.println(tempParticipant.toStringWithNumber() + " removed.");
 			allParticipants.remove(tempParticipant);
+			for (Event e : allEvents) {
+				e.removePartResult(tempParticipant);
+			}
 			return;
 		}
 
 		System.out.println("Error: no participant with number " + removeNumber + " exists.");
 	}
 
-	public void addResult() {
-
-		double resultNumber = 0;
-
+	private void addResult() {
+	
+		boolean goodResult = false;
+		
 		System.out.print("Number: ");
-		int checkParticipant = scan.nextInt();
+		int partNumber = scan.nextInt();
 		scan.nextLine();
-		Participant goodParticipant = getParticipant(checkParticipant);
-
-		if (goodParticipant != null) {
-			System.out.print("Event: ");
-			String resultEvent = scan.nextLine();
-			resultEvent = test.capitalizeTrim(resultEvent);
-
-			Event e = getEvent(resultEvent);
-			if (e != null) {
-				do {
-					System.out.print("Results for " + goodParticipant.toString() + " in " + e.getName() + ": ");
-					resultNumber = scan.nextDouble();
-					scan.nextLine();
-
-					Result result = new Result(e, goodParticipant, +resultNumber);
-					e.addResult(result);
-					goodParticipant.addResult(result);
-
-				} while (resultNumber <= 0);
-			} else {
-				System.out.println("Error: no event called: '" + resultEvent + "' found!");
-			}
-		} else {
-			System.out.println("Error: no participant with number " + checkParticipant + " found!");
+		Participant p = getParticipant(partNumber);
+		
+		if (p == null) {
+			System.out.println("Error: participant does not exist.");
+			return;
 		}
+		System.out.print("Event: ");
+		String eventName = scan.nextLine();
+		eventName = test.capitalizeTrim(eventName);
+		Event e = getEvent(eventName);
+		if (e == null) {
+			System.out.println("Error: event does not exist.");
+			return;
+		}
+		
+		Result r = p.getResult(e);
+		
+		if (r != null) {
+			if (r.getTries() >= e.getAttempts()) {
+				System.out.println("Error: No more attempts.");
+				return;
+			}
+		}	
+		
+		System.out.print("Add result for " + p.getFullName() + " in " + e.getName() + ": " );
+		double result = scan.nextDouble();
+		
+		if(result < 0) {
+			while (!goodResult) {
+				goodResult = true;
+				System.out.println("Error: must be higher than zero.");
+				result = scan.nextDouble();
+				if(result < 0) {
+					goodResult = false;
+				}
+			}
+		}
+		
+		scan.nextLine();
+		if (r == null) {
+			r = new Result(e, p, result);
+			p.addResult(r);
+			e.addResult(r);
+		} 
+		else {
+			r.addTries(result);
+		} 		
 	}
 
-	public void checkParticipant() {
+	private void checkParticipant() {
 	
 		System.out.print("Number: ");
 		int searchParticipant = scan.nextInt();
@@ -196,7 +227,7 @@ public class StartMethods {
 
 	}
 
-	public void addEvent() {
+	private void addEvent() {
 
 		String eventName;
 		int noOfTries;
@@ -204,19 +235,21 @@ public class StartMethods {
 		do {
 			System.out.print("Event name: ");
 			eventName = scan.nextLine();
-
+			
+			for (Event e : allEvents) {
+				
+				if (eventName.trim().equalsIgnoreCase(e.getName())) {
+					System.out.println("Error: event already exists.");
+					return;
+				}
+			}
+			
 			if (eventName == null || eventName.trim().isEmpty()) {
 				System.out.println("Error: name can't be empty.");
 				continue;
 			}
 
-			else if (getEvent(eventName) != null) {
-				System.out.println("Error: event already exists.");
-				break;
-			}
-
 			else {
-				eventName = test.capitalizeTrim(eventName);
 				do {
 					System.out.print("Attempts allowed: ");
 					noOfTries = scan.nextInt();
@@ -225,7 +258,9 @@ public class StartMethods {
 					if (noOfTries <= 0) {
 						System.out.println("Error: too low, must allow at least one attempt.");
 						continue;
-					} else {
+					} 
+					else {
+						eventName = test.capitalizeTrim(eventName);
 						Event event = new Event(eventName, noOfTries);
 						allEvents.add(event);
 						System.out.println(eventName + " added.");
