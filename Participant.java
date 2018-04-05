@@ -1,3 +1,6 @@
+// Anton Sandström ansa6928
+// Jesper Jönsson jeja6606
+
 import java.util.ArrayList;
 
 public class Participant {
@@ -12,9 +15,14 @@ public class Participant {
 		this.teamName = teamName;
 		this.participantNumber = participantNumber;
 	}
-	
-	public Participant() {
 		
+	public Result getResult(Event e) {
+		for (Result r : allResults) {
+			if (r.getEvent().getName().equals(e.getName())) {
+				return r;
+			}
+		}
+		return null;
 	}
 
 	public String getFirstName() {
@@ -38,7 +46,9 @@ public class Participant {
 	}
 	
 	public void printResults() {
-		System.out.println("Results for " + getFullName());
+		for (Result r : allResults) {
+			System.out.println(r.toString());
+		}
 	}
 	
 	public String toString() {
